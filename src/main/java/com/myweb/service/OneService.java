@@ -1,16 +1,10 @@
 package com.myweb.service;
 
-
-import com.myweb.pojo.*;
 import com.myweb.vo.OneParameter;
 import com.utils.Result;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
-
-public interface OneService {
+public interface OneService
+{
 
     public Result scan(OneParameter oneParameter);
 
@@ -29,4 +23,12 @@ public interface OneService {
     public Result login(OneParameter oneParameter);
 
     public Result set(OneParameter oneParameter);
+
+    /**
+     * 获取微信用户详细信息
+     * 
+     * @param oneParameter
+     * @return
+     */
+    public Result weixinUserInfo(OneParameter oneParameter);
 }
