@@ -1,0 +1,93 @@
+group 'com.myweb'
+version '1.0-SNAPSHOT'
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+repositories {
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
+    mavenLocal()
+
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE'
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.12.RELEASE')
+    }
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+dependencyManagement {
+    imports {
+        mavenBom 'io.spring.platform:platform-bom:Brussels-SR9'
+    }
+}
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = "utf-8"
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-logging"
+    }
+
+    compile("org.springframework.boot:spring-boot-starter-websocket"){
+        exclude module: "spring-boot-starter-logging"
+    }
+
+    compile("org.springframework.boot:spring-boot-starter-log4j2")
+
+    compile("org.springframework.boot:spring-boot-devtools")
+
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+
+    compile("org.aspectj:aspectjweaver")
+
+    compile('org.apache.logging.log4j:log4j-api',
+            'org.apache.logging.log4j:log4j-core')
+
+    compile('org.apache.tomcat:tomcat-jdbc')
+
+    compile('org.springframework:spring-context')
+
+    compile('org.apache.commons:commons-lang3')
+
+    compile("javax.servlet:javax.servlet-api")
+
+    compile('org.springframework:spring-webmvc')
+
+    compile('org.springframework.security:spring-security-web')
+
+    compile('com.fasterxml.jackson.core:jackson-databind', 'com.fasterxml.jackson.core:jackson-core')
+
+    compile("mysql:mysql-connector-java")
+
+    compile('org.springframework.data:spring-data-jpa')
+
+    compile('org.hibernate:hibernate-entitymanager')
+
+    compile('commons-io:commons-io')
+
+    compile('org.apache.httpcomponents:httpclient')
+
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
+
+}
